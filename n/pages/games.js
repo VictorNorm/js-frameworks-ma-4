@@ -3,6 +3,7 @@ import Head from "../components/Head";
 import Heading from "../components/Heading";
 import { baseUrl } from "../constants/api";
 import axios from "axios";
+import Image from "next/image";
 
 export default function Games(props) {
   console.log(props);
@@ -14,9 +15,21 @@ export default function Games(props) {
       </Head>
 
       <Heading heading="This is the game page" />
-      {props.games.map((game) => {
-        return <div key={game.id}>{game.name}</div>;
-      })}
+      <div className="game-wrapper">
+        {props.games.map((game) => {
+          return (
+            <div key={game.id} className="game-container">
+              <Image
+                src={game.background_image}
+                width="300"
+                height="150"
+                alt="An image of the game"
+              />{" "}
+              <h3>{game.name}</h3>
+            </div>
+          );
+        })}
+      </div>
     </Layout>
   );
 }
